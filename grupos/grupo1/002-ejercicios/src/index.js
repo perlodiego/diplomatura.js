@@ -3,7 +3,7 @@ import { database } from './basededatos';
 
 // 2) Implementar una función que obtenga una universidad por Id
 // 🤓 Tip: pueden ir probando las funciones usando console.log() asegurándose que los resultados sean los esperados
-
+consolelog('hola')
 // 3) Implementar una función que obtenga un profesor por Id
 
 // 4) Implementar una función que obtenga una materia por Id
