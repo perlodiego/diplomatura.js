@@ -26,11 +26,16 @@ const getMateriaById = (id) => {
     return getInfoById('materias', id)
 }
 
+const getAlumnoById = (id) => {
+    return getInfoById('alumnos', id)
+}
+
 // 5) Crear un objeto 'helpers' que contenga las funciones como métodos
 let helpers = {
     universidadById: getUniversidadById,
     profesorById: getProfesorById,
-    materiaById: getMateriaById
+    materiaById: getMateriaById,
+    alumnoById: getAlumnoById
 };
 
 
