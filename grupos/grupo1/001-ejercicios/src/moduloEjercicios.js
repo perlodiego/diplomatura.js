@@ -92,7 +92,60 @@ export const materiasAprobadasByNombreAlumno = (nombreAlumno) => {
  * @param {string} nombreUniversidad
  */
 export const expandirInfoUniversidadByNombre = (nombreUniversidad) => {
-  return {};
+
+  let universidades = database.universidades;
+  let universidad = universidades.find((universidad) => universidad.nombre === nombreUniversidad);
+
+  if(!universidad){
+    return undefined;
+  }
+
+  // Obtenemos las materias dictadas por la universidad con sus profesores
+
+  let materias = database.materias;
+  let materiasUniversidad = [];
+  let profesoresUniversidad = [];
+  let idMateriasUniversidad = [];
+  for (let materia of materias){
+    let univ = materia.universidad;
+    if (univ === universidad.id){
+      materiasUniversidad.push(materia);
+      profesoresUniversidad.push(materia.profesores);
+      idMateriasUniversidad.push(materia.id);
+    }
+  }
+
+  // Convertimos la lista de profesores en valores únicos
+  profesoresUniversidad = [...new Set(profesoresUniversidad.flat())];
+
+  // Extraemos los datos de los profesores
+  let profesores = database.profesores;
+  let datosProfesores = [];
+  for (let profesor of profesores){
+    for (let i = 0; i < profesoresUniversidad.length; i++){
+      if(profesor.id === profesoresUniversidad[i]){
+        datosProfesores.push(profesor);
+        break;
+      }
+    }
+  }
+
+  // Obtenemos los datos de los alumnos
+  let alumnos = database.alumnos;
+  let calificaciones = database.calificaciones;
+  let alumnosUniversidad = [];
+
+  for (let calificacion of calificaciones){
+    for (let i = 0; i<idMateriasUniversidad.length; i++){
+      if (calificacion.materia === idMateriasUniversidad[i]){
+        alumnosUniversidad.push(alumnos.find((alumno) => alumno.id === calificacion.alumno))
+      }
+    }
+  }
+
+  alumnosUniversidad = [...new Set(alumnosUniversidad)];
+
+  return {universidad: universidad, materias: materiasUniversidad, profesores: datosProfesores, alumnos: alumnosUniversidad};
 };
 
 // /**
