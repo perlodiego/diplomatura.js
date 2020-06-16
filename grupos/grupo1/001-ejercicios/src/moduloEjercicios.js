@@ -1,4 +1,4 @@
-import basededatos from './basededatos';
+import basededatos, { database } from './basededatos';
 
 /**
  * Obtiene la lista de materias aprobadas (nota >= 4) para el nombre de alumno dado.
@@ -24,7 +24,30 @@ import basededatos from './basededatos';
 export const materiasAprobadasByNombreAlumno = (nombreAlumno) => {
   // Ejemplo de como accedo a datos dentro de la base de datos
   // console.log(basededatos.alumnos);
-  return [];
+  let alumnos = basededatos.alumnos;
+  let idAlumno = alumnos.find((alumno) => alumno.nombre === nombreAlumno).id;
+
+  if (!idAlumno){
+    return undefined;
+  }
+
+  let calificaciones = basededatos.calificaciones;
+  let materiasAprobadasAlumno = calificaciones.filter((calificacion)=>calificacion.alumno === idAlumno && calificacion.nota >= 4);
+
+  if(!materiasAprobadasAlumno){
+    return [];
+  }
+
+  let materias = basededatos.materias;
+  let materiasAprobadas = [];
+  for(let i = 0; i< materiasAprobadasAlumno.length; i++){
+    let materia = materias.find((materia)=>materia.id === materiasAprobadasAlumno[i].materia);
+    if(materia){
+      materiasAprobadas.push(materia);
+    }
+  }
+  
+  return materiasAprobadas;
 };
 
 /**
