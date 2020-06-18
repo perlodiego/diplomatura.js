@@ -50,6 +50,8 @@ const setProvinciaByName = (nombreProvincia) => {
         id: lastId + 1,
         nombre: nombreProvincia
     })
+
+    return lastId;
 }
 
 
