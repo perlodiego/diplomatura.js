@@ -47,5 +47,5 @@ console.log(helpers.getNotasDeAlumnos());
 console.log('ejercicio 12: Guardar calificación de alumno y materia, si no existen crear en cada caso');
 console.log(helpers.calificarAlumnado('Pablo Tomafi','Una cualquiera',8))
 console.log(helpers.calificarAlumnado('Pablo Tomafi','Análisis matemático',9))
-console.log(helpers.calificarAlumnado('Alina Robles','Programación orientada a objetos',10))
+console.log(helpers.calificarAlumnado('Alfajor Jorgito','Programación orientada a objetos',10))
 
