@@ -144,8 +144,8 @@ export const expandirInfoUniversidadByNombre = (nombreUniversidad) => {
   }
 
   alumnosUniversidad = [...new Set(alumnosUniversidad)];
-
-  return {universidad: universidad, materias: materiasUniversidad, profesores: datosProfesores, alumnos: alumnosUniversidad};
+  return Object.assign(universidad, {materias: materiasUniversidad, profesores: datosProfesores, alumnos: alumnosUniversidad})
+  //return {universidad, materias: materiasUniversidad, profesores: datosProfesores, alumnos: alumnosUniversidad};
 };
 
 // /**
