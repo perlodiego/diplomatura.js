@@ -1,13 +1,27 @@
 // 1) Importar el objeto 'database' del archivo "./basededatos"
-import { database } from './basededatos';
+import { database } from './baseDeDatos';
 
 // 2) Implementar una función que obtenga una universidad por Id
 // 🤓 Tip: pueden ir probando las funciones usando console.log() asegurándose que los resultados sean los esperados
-console.log('Test permisos')
+function getUnivById(id){
+    return database.universidades.find((uni)=>uni.id===id)
+}
 // 3) Implementar una función que obtenga un profesor por Id
+function getProfesorById(id){
+    return database.profesores.find((profe)=>profe.id===id)
 
+}
 // 4) Implementar una función que obtenga una materia por Id
 // 🤓 Tip: Comparar con la función del ejercicio (3) y ver si se les ocurre una función genérica que sirva para cualquier tabla
+function getMateriById(id){
+    return database.materias.find((materia)=>materia.id===id);
+}
+const getById = (tabla,id)=>(database[tabla].find((t)=>t.id===id))
+
+console.log(getUnivById(1))
+console.log(getProfesorById(2))
+console.log(getMateriById(3))
+console.log(getById('profesores',3))
 
 // 5) Crear un objeto 'helpers' que contenga las funciones como métodos
 
