@@ -79,13 +79,15 @@ const getDetalleMateriaById = (id) => {
 
 const getInfoAlumnos = () => {
     let calificaciones = database.calificaciones;
+    let datosAlumnos = database.alumnos;
 
     console.log('NOTAS DE ALUMNOS');
     console.log('----------------');
 
     // Este paso es para devolver los alumnos presentes en calificación sin repeticiones:
     let set_alumnos = new Set();
-    let alumnos = calificaciones.map((calificacion) => calificacion.alumno);
+    let alumnos = datosAlumnos.map((alumno)=>alumno.id);
+    //let alumnos = calificaciones.map((calificacion) => calificacion.alumno);
     for (let alumno of alumnos){
         set_alumnos.add(alumno);
     }
@@ -102,6 +104,7 @@ const getInfoAlumnos = () => {
         }
         console.log('\n')
     }
+    return console.log('----------------');
 }
 
 // 12) Implementar una función que guarde la calificación de un alumno y una materia
@@ -152,7 +155,6 @@ const guardarCalificacionMateria = (nombreAlumno, nombreMateria, nota) => {
         nota: nota
     })
 
-    return;
 }
 
 
