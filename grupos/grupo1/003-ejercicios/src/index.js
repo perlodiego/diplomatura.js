@@ -10,10 +10,16 @@ console.log(colection.lista)
 console.log(colection.has('manzana'))
 
 const delay= new Delay()
-delay.delay('Termino 1',1000)
-delay.delay('Termino 2',1000)
-delay.delay('Termino 3',1000)
-delay.run()
-delay.delay('Termino 1',3000)
-delay.delay('Termino 2',2000)
-delay.delay('Termino 3',1000)
+/* console.log(1);
+delay.delay('Terminó 1', 1000);
+console.log(2);
+delay.delay('Terminó 2', 1000);
+console.log(3);
+delay.delay('Terminó 3', 1000); */
+
+console.log(1);
+delay.delay('Terminó 1', 3000);
+console.log(2);
+delay.delay('Terminó 2', 2000);
+console.log(3);
+delay.delay('Terminó 3', 1000);
