@@ -216,30 +216,47 @@ export const expandirInfoUniversidadByNombre = (nombreUniversidad) => {
 // /**
 //  * Devuelve el promedio de edad de los alumnos.
 //  */
-// export const promedioDeEdad = () => {
-//   return [];
-// };
+ export const promedioDeEdad = () => {
+   return basededatos.alumnos.reduce((result,x)=>result+x.edad,0)/basededatos.alumnos.length;
+ };
+ console.log('promedioDeEdad:')
+ console.log(promedioDeEdad())
+ console.log('- - - - - - - - - - - - ')
 
 // /**
 //  * Devuelve la lista de alumnos con promedio mayor al numero pasado
 //  * por parametro.
 //  * @param {number} promedio
 //  */
-// export const alumnosConPromedioMayorA = (promedio) => {
-//   return [];
-// };
+ export const alumnosConPromedioMayorA = (promedio) => {
+   const promediosMayoresA=basededatos.calificaciones.filter(x=>x.nota>promedio);
+   const alumnos = Array.from(new Set(promediosMayoresA.map(x=>x.alumno)));
+   return basededatos.alumnos.filter(x=>alumnos.includes(x.id));
+ };
+ console.log('alumnosConPromedioMayorA(3)')
+ console.log(alumnosConPromedioMayorA(4))
+ console.log('- - - - - - - - - - - - ')
 
 // /**
 //  * Devuelve la lista de materias sin alumnos
 //  */
-// export const materiasSinAlumnosAnotados = () => {
-//   return [];
-// };
+ export const materiasSinAlumnosAnotados = () => {
+   return basededatos.materias.map(x=>{delete x.alumnos; return x});
+ };
+
+console.log('materiasSinAlumnosAnotados()');
+console.log(materiasSinAlumnosAnotados());
+console.log('- - - - - - - - - - - - ')
 
 // /**
 //  * Devuelve el promdedio de edad segun el id de la universidad.
 //  * @param {number} universidadId
 //  */
-// export const promedioDeEdadByUniversidadId = (universidadId) => {
-//   return [];
-// };
+ export const promedioDeEdadByUniversidadId = (universidadId) => {
+   const alumnos = basededatos.alumnos.filter(x=>x.universidad==universidadId)
+   return Math.round(alumnos.reduce((result,x)=>result+x.edad,0)/alumnos.length);
+ };
+
+ console.log('promedioDeEdadByUniversidadId(1)');
+ console.log(promedioDeEdadByUniversidadId(1));
+ console.log('- - - - - - - - - - - - ')
