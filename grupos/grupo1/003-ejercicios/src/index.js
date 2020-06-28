@@ -10,5 +10,10 @@ lista.add('naranja');
 lista.add('banana');
 console.log(lista);
 console.log("tiene elemento banana?");
-
 console.log(lista.has('banana'));
+console.log("borrar elemento naranja");
+lista.delete('naranja');
+
+console.log(lista);
+console.log("tiene elemento naranja?");
+console.log(lista.has('naranja'));

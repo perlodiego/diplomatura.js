@@ -1,14 +1,14 @@
 export class Collection{
-    constructor(tipo=[]){
-        this.tipo = tipo || [];
+    constructor(value=[]){
+        this.lista = value || [];
     }
     add(elemento){
-        this.tipo.push(elemento);
-     }
-    delete(elemento){
-        let index = this.tipo.indexOf(elemento);
-        if(index != -1) this.tipo.splice(index,1);
+        if(!this.has(elemento)) this.lista.push(elemento);
     }
-    has(elemento){ return this.tipo.indexOf(elemento)!=-1 };
+    delete(elemento){
+        let index = this.lista.indexOf(elemento);
+        if(index != -1) this.lista.splice(index,1);
+    }
+    has(elemento){ return this.lista.includes(elemento)};
 }
 
