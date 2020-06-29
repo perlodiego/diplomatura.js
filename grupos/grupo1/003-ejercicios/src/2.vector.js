@@ -19,12 +19,18 @@ Escribir una clase Vector que represente un espacio de dos dimensiones x e y. Es
         this.x=x;
         this.y=y;
       };
-      getX(){
-          return 'Valor de x: '+this.x;
-      }
-      getY(){
-          return 'Valor de y: '+this.y;
-      }
+      get x(){
+        return this._x;
+      };
+      set x(val){
+        this._x=val;
+      };
+      get y(){
+        return this._y;
+      };
+      set y(val){
+        this._y=val;
+      };
       sumar(vector){
         return new Vector(this.x+vector.x,this.y+vector.y);
       };

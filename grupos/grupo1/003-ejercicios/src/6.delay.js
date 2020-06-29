@@ -30,32 +30,22 @@ return new Promise(resolve => {
 ```*/
 
 const delay=async (milisegundos)=>{
-    return new Promise(res=>res(setTimeout(()=>true,milisegundos)));
+    return new Promise(res=>setTimeout(()=>res(true),milisegundos));
 }
 
 const run=async ()=>{
-   delay(10000).then(res=>{
-        console.log('Resultado 1')
-        console.log(res);
-        if (res) {
-            console.log(1);
-            console.log('Terminó 1');
-        }
-   }).catch(err=>console.log('Error en 1: '+err));
-   
-   delay(10000).then(res=>{
-        if (res) {
-            console.log(2);
-            console.log('Terminó 2');
-        }
-    }).catch(err=>console.log('Error en 2: '+err));
-
-   delay(10000).then(res=>{
-        if (res) {
-            console.log(3);
-            console.log('Terminó 3');
-        }
-    }).catch(err=>console.log('Error en 3: '+err));
+  await delay(1000).then(res=>{
+    console.log(1)
+    console.log('Terminó 1')
+  });
+  await delay(1000).then(res=>{
+    console.log(2)
+    console.log('Terminó 2')
+  });
+  await delay(1000).then(res=>{
+    console.log(3)
+    console.log('Terminó 3')
+  });
 }
 
 export const CallbackRecargado={
