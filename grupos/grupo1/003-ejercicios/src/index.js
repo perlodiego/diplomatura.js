@@ -3,7 +3,7 @@ import {Delay } from './3.delay'
 import {Vector} from './2.claseVector'
 import {resultadoConsole,resultadoJson,resultadoFiltrado} from './4.api'
 import {getRemoteData } from './5.api.AsyncAwait'
-
+import {delay,run} from './6.delayRefactor'
 /* const colection = new Collection();
 colection.add('manzana')
 colection.add('naranja')
@@ -33,3 +33,7 @@ delay.delay('Terminó 3', 1000); */
 //resultadoJson()
 //resultadoFiltrado(10)
 //getRemoteData(9)
+
+/* delay(1);
+delay(2);
+delay(3); */
