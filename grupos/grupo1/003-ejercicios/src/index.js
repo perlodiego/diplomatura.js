@@ -46,9 +46,9 @@ console.log('Probamos new Vector(1, 2).sumar(new Vector(2, 3))')
 
 const vectorNuevo=new Vector(1, 2).sumar(new Vector(2, 3));
 console.log(vectorNuevo);
-console.log('\nObtenemos los valores de x e y mediante vectorNuevo.x y vectorNuevo.x')
-console.log(vectorNuevo.x)
-console.log(vectorNuevo.y)
+console.log('\nObtenemos los valores de x e y mediante vectorNuevo.getX() y vectorNuevo.getY()')
+console.log(vectorNuevo.getX())
+console.log(vectorNuevo.getY())
 
 //Ejercicio 3
 console.log('\n--- Probamos el ejercicio 3 ---')

@@ -15,6 +15,22 @@ Escribir una clase Vector que represente un espacio de dos dimensiones x e y. Es
   ```*/
 
   export class Vector {
+    constructor(x=0,y=0){
+      this.x=x;
+      this.y=y;
+    };
+    getX(){
+      return this.x;
+    };
+    getY(){
+      return this.y;
+    };
+    sumar(vector){
+      return new Vector(this.x+vector.x,this.y+vector.y);
+    };
+}
+
+ /* export class Vector {
       constructor(x=0,y=0){
         this.x=x;
         this.y=y;
@@ -34,4 +50,4 @@ Escribir una clase Vector que represente un espacio de dos dimensiones x e y. Es
       sumar(vector){
         return new Vector(this.x+vector.x,this.y+vector.y);
       };
-  }
+  }*/
