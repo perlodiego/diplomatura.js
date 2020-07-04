@@ -1,54 +1,46 @@
 import express from 'express';
-import fetch from 'node-fetch';
+import { Helpers } from './helpers';
 
-const SOURCE_URL='https://jsonplaceholder.typicode.com/';
-const POSTS_URL = 'posts/'
-const USERS_URL = 'users/';
+const POSTS_URL    = 'posts';
+const USERS_URL    = 'users';
+const COMMENTS_URL = 'comments';
 
-var postApi = express.Router();
+const postApi = express.Router();
 
 postApi.get('/', async function (req, res) {
-  const posts = await fetch(SOURCE_URL+POSTS_URL);
-  const jsonPosts = await posts.json();
-
-  const users     = await fetch(SOURCE_URL+USERS_URL);
-  const jsonUsers = await users.json();
-  jsonPosts.forEach(post=>{
-      post.user=jsonUsers.find(({id})=>id===post.userId);
-      delete post.userId;
-  })
-
-  res.send(jsonPosts);
+  try {
+    const posts     = await Helpers.fetch(POSTS_URL);
+    const users     = await Helpers.fetch(USERS_URL);
+    posts.forEach(post=>{
+        post.user=users.find(({id})=>id===post.userId);
+        delete post.userId;
+    });
+    res.send(posts);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 });
 
 postApi.get('/:id', async function (req, res) {
-  const { id }       = req.params;
-  const post         = await fetch(SOURCE_URL+POSTS_URL+id)
-  .then(postJSON=>postJSON.json())
-  .catch(err=>{
+  try {
+    const { id }       = req.params;
+    const post         = await Helpers.fetch(POSTS_URL,id);
+   
+    await Helpers.fetch(POSTS_URL,id,COMMENTS_URL)
+    .then(arrayOfComments=>{
+      arrayOfComments.forEach(comment=>delete comment.postId);
+      post.posts = arrayOfComments;
+    }).catch(err=>{
+      console.log(err);
+      res.json(err);
+    });
+    
+    res.send(post);
+  } catch (err) {
     console.log(err);
-    res.json(err);
-  });
-
-  await fetch(SOURCE_URL+USERS_URL+post.userId)
-  .then(jsonUser=>jsonUser.json())
-  .then(user=>post.user=user)
-  .catch(err=>{
-    console.log(err);
-    res.json(err);
-  });
-  
-  await fetch(SOURCE_URL+POSTS_URL+id+'/comments')
-  .then(comments=>comments.json())
-  .then(arrayOfComments=>{
-    arrayOfComments.forEach(comment=>delete comment.postId);
-    post.comments = arrayOfComments;
-  }).catch(err=>{
-    console.log(err);
-    res.json(err);
-  });
-  
-  res.send(post);
+    res.send(err);
+  }
 });
 
 export default postApi;
