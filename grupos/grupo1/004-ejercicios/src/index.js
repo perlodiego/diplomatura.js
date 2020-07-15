@@ -33,6 +33,7 @@ app.get('/', function (req, res) {
       uptime: os.uptime(),
       hostname: os.hostname(),
       platform: os.platform(),
+      nombre: "German",
     }     
   };
   res.json(result);
