@@ -4,6 +4,7 @@ const dbClient = mongo.MongoClient;
 const dbname = 'universidad';
 const url = `mongodb://localhost:27017/${dbname}`;
 let   _db;
+let   _coneccion;
 
 /**
   * Connects to the database specified in this file and assing the result to _db
@@ -14,7 +15,8 @@ async function connectDB(){
             console.log(err);
             throw err;
         }
-        _db = database.db(dbname);
+        _coneccion=database;
+        _db = _coneccion.db(dbname);
         if (!_db) {
             console.log(err);
             throw err;
@@ -34,7 +36,7 @@ const getDb=()=>_db;
   */
 const getCollection=(name)=>(database)=>database.collection(name);
 
-const closeDb=()=>_db.close();
+const closeDb=()=>_coneccion.close();
 
 export const db = {
     connectDB,
