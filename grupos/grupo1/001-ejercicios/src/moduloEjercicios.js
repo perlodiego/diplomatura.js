@@ -23,7 +23,6 @@ import basededatos from './basededatos';
  */
 export const materiasAprobadasByNombreAlumno = (nombreAlumno) => {
   // Ejemplo de como accedo a datos dentro de la base de datos
-<<<<<<< HEAD
   // console.log(basededatos.alumnos);
   // console.log(nombreAlumno);
   let alumno = basededatos.alumnos.find((object) =>  object.nombre === nombreAlumno);
@@ -48,40 +47,6 @@ export const materiasAprobadasByNombreAlumno = (nombreAlumno) => {
 
 
   return [];
-=======
-  let alumnos = basededatos.alumnos;
-  let calificaciones = basededatos.calificaciones;
-  let materias = basededatos.materias;
-  let idalumno;
-  let idmaterias = [];
-  let response = [];
-
-  //Busco id de alumno
-  for (let i in alumnos) {
-    if (alumnos[i].nombre === nombreAlumno) {
-      idalumno = alumnos[i].id;
-      break;
-    }
-  }
-
-  if (!idalumno) return idalumno; //undefined
-
-  // Busco materias aprobadas
-  for (let i in calificaciones) {
-    if (calificaciones[i].alumno === idalumno && calificaciones[i].nota > 4) {
-      idmaterias.push(calificaciones[i].materia);
-    }
-  }
-
-  // Agrego las materias al response
-  for (let i in materias) {
-    if (idmaterias.includes(materias[i].id)) {
-      response.push(materias[i]);
-    }
-  }
-
-  return response;
->>>>>>> master
 };
 
 /**
