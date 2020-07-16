@@ -1,32 +1,23 @@
-import { db } from '../models/db';
-import { paramsBuilder } from '../models/helpers';
+//import { db } from '../helpers/db';
+import { paramsBuilder } from '../helpers/helpers';
+import { insertToDb } from '../helpers/helpers';
 
 const collectionName = 'alumnos';
-const validParams = ['id','nombre','edad','provincia'];
+const validParams = ['id', 'nombre', 'edad', 'provincia'];
 
-async function create(req,res){
+async function create(req, res) {
+
   try {
-    const params     = paramsBuilder(validParams,req.body);
-    const database   = await db.getDb();
-    const collection = db.getCollection(collectionName)(database);
-    collection.insertOne(params).then(alumno=>{
-        req.alumno = alumno;
-        db.closeDb();
-        res.send(alumno);
-    }).catch(error=>{
-        db.closeDb();
-        console.log(error);
-        res.status(422).json({
-            error
-        })
-    });
-  } catch (err) {
-    console.log(err);
-    res.json(err);
+    const params = paramsBuilder(validParams, req.body);
+    const result = await insertToDb(collectionName, params);
+    res.send(result);
+
+  } catch (e) {
+    res.json(e);
   }
 }
-
-/*router.get('/', function (req, res) {
+/*
+router.get('/', function (req, res) {
   // Completar
   res.json({});
 });
@@ -46,4 +37,4 @@ router.post('/', function (req, res) {
 // Completar el resto de los métodos
 // router....
 */
-module.exports = { create }
+module.exports = { create };
