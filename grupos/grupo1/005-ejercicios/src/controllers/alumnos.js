@@ -1,10 +1,13 @@
 import express from 'express';
+import { Conexion } from '../model/conexion';
 
 const router = express.Router();
-
-router.get('/', function (req, res) {
+router.get('/', async function (req, res) {
   // Completar
-  res.json({});
+  const db = await Conexion.conect();
+  const collection = await db.collection('alumnos').find({}).toArray();
+  Conexion.closeConexion();
+  res.json({ collection });
 });
 
 router.get('/:id', function (req, res) {
