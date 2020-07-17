@@ -1,9 +1,10 @@
 // importa metodos 
 import express, { json } from 'express';
 import bodyParser from 'body-parser';
-import alumnosRoutes from './Diplomatura Javascript/999 - Practicas/diplomatura.js/grupos/grupo1/005-ejercicios/src/routes/alumnosRouter';
-import profesoresRoutes from './Diplomatura Javascript/999 - Practicas/diplomatura.js/grupos/grupo1/005-ejercicios/src/routes/profesoresRouter';
-import { db } from './Diplomatura Javascript/999 - Practicas/diplomatura.js/grupos/grupo1/005-ejercicios/src/models/db';
+import alumnosRoutes from './routes/alumnosRouter';
+import profesoresRoutes from './routes/profesoresRouter';
+import { db } from './models/db';
+
 
 // definicion de puerto
 const PORT = 8080;
