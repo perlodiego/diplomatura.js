@@ -2,8 +2,8 @@ import { db } from '../models/db';
 import { Helpers } from '../models/helpers';
 import { ObjectId } from 'mongodb';
 
-const collectionName = 'alumnos';
-const validParams = ['id','nombre','edad','provincia'];
+const collectionName = 'profesores';
+const validParams = ['id','nombre'];
 
 function create(req,res){
   try {

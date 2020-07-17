@@ -1,18 +1,20 @@
 import express, { json } from 'express';
 import bodyParser from 'body-parser';
 import alumnosRoutes from './routes/alumnosRouter';
+import profesoresRoutes from './routes/profesoresRouter';
 import { db } from './models/db';
 
 const PORT = 8080;
 const app = express();
 
 db.connectDB((err,database )=>{
-  if (err) console.log(err);
+   if (err) console.log(err);
 });
 
 app.use(bodyParser.json());
 
 app.use('/alumnos', alumnosRoutes);
+app.use('/profesores', profesoresRoutes);
 
 app.get('/', function (req,res) {
   res.json({ mensaje: 'Bienvenido al servidor de la Universidad' });

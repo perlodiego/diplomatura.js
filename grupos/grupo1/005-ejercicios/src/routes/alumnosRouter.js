@@ -7,7 +7,18 @@ router.route('/')
     alumnosController.create
 )
 .get(
-    //alumnosController.listu
+    alumnosController.index
+)
+
+router.route('/:id')
+.get(
+    alumnosController.display
+)
+.put(
+    alumnosController.update
+)
+.delete(
+    alumnosController.destroy
 )
 
 module.exports = router;

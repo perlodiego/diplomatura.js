@@ -1,3 +1,23 @@
+/**
+  * Devuelve un objeto filtrando post con los parámetros admitidos
+  * @param {Array} validParams accepted params for validation
+  * @param {Object} requestBody parameters sended by post
+  */
+
+ const paramsBuilder=(validParams,requestBody)=>validParams.reduce((filteredObject,acceptedAttribute)=>{
+    if (Object.prototype.hasOwnProperty.call(requestBody,acceptedAttribute)) {
+        filteredObject[acceptedAttribute] = requestBody[acceptedAttribute];
+    }
+    return filteredObject;
+},{});
+
+export const Helpers = {
+  paramsBuilder
+};
+/*
+
+
+*/
 import mongo from 'mongodb';
 
 const dbClient = mongo.MongoClient;
@@ -38,7 +58,7 @@ const getDb=()=>_db;
   * @param {String} name The collection you want to use
   * @param {Object} database The database that has the collection
   */
-const getCollection=(name)=>(database)=>database.collection(name)??_db.collection(name);
+const getCollection=(name)=>(database)=>database.collection(name);
 
 //const closeDb=()=>_conexion.close();
 
