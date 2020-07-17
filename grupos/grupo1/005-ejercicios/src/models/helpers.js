@@ -25,19 +25,19 @@ const insertToDb=async (collectionName,params)=>{
 
 const find=async (collectionName,query)=>{
   const collection = await getCollection(collectionName);
-  const result     = collection.find(query).toArray();
+  const result     = await collection.find(query).toArray();
   return result;
 }
 
 const findOne=async (collectionName,query)=>{
   const collection = await getCollection(collectionName);
-  const result     = collection.findOne(query);
+  const result     = await collection.findOne(query);
   return result;
 }
 
 const update=async(collectionName,query,updateData,opts)=>{
   const collection = await getCollection(collectionName);
-  const result     = collection.findOneAndUpdate(
+  const result     = await collection.findOneAndUpdate(
                                   query,
                                   { $set: updateData },
                                   opts
@@ -47,7 +47,7 @@ const update=async(collectionName,query,updateData,opts)=>{
 
 const destroy=async (collectionName,query)=>{
   const collection = await getCollection(collectionName);
-  const result=collection.deleteOne(query);
+  const result     = await collection.deleteOne(query);
   return result;
 }
 

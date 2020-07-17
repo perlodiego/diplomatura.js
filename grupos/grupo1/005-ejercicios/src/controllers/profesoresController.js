@@ -1,27 +1,26 @@
-import { db } from '../models/db';
 import { Helpers } from '../models/helpers';
 import { ObjectId } from 'mongodb';
 
 const collectionName = 'profesores';
 const validParams = ['id','nombre'];
 
-function create(req,res){
+async function create(req,res){
   try {
     const params     = Helpers.paramsBuilder(validParams,req.body);
-    Helpers.insertToDb(collectionName,params).then(doc=>res.send(doc));
+    await Helpers.insertToDb(collectionName,params).then(doc=>res.send(doc));
   } catch (err) {
     console.log(err);
     res.json(err);
   }
 }
 
-function index(req,res){
+async function index(req,res){
   try {
     const query= req.query.nombre ?
                   { nombre: req.query.nombre }
                  :
                   '';
-    Helpers.find(collectionName,query).then(docs=>{
+    await Helpers.find(collectionName,query).then(docs=>{
         res.send(docs)
     });
   } catch (err) {
@@ -30,10 +29,10 @@ function index(req,res){
   }
 }
 
-function display(req,res){
+async function display(req,res){
   try {
     const query={ _id: new ObjectId(req.params.id) };
-    Helpers.findOne(collectionName,query).then(doc=>{
+    await Helpers.findOne(collectionName,query).then(doc=>{
       if (doc) {
         console.log(doc);
       } else {
@@ -47,12 +46,12 @@ function display(req,res){
     }
 }
 
-function update(req,res){
+async function update(req,res){
     const updateData=Helpers.paramsBuilder(validParams,req.body);
     const query={'_id' : new ObjectId(req.params.id)};
     const opts={ new :true };
 
-    Helpers.update(collectionName,query,updateData,opts).then(doc=>{
+    await Helpers.update(collectionName,query,updateData,opts).then(doc=>{
       console.log(doc)
       res.json(doc);
     }).catch(err=>{
@@ -61,9 +60,9 @@ function update(req,res){
     });
 }
 
-function destroy(req,res){
+async function destroy(req,res){
   const query={'_id' : new ObjectId(req.params.id)};
-  Helpers.destroy(collectionName,query).then(doc=>{
+  await Helpers.destroy(collectionName,query).then(doc=>{
     console.log(doc)
     res.json(doc);
   }).catch(err=>{
