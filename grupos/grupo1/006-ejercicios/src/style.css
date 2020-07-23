@@ -1,3 +1,13 @@
 body {
   font-family: sans-serif;
 }
+.delBtn {
+  color: yellow;
+  background-color: tomato;
+  align-content: center;
+  font-size: 8pt;
+}
+.btAdd {
+  color: black;
+  background-color: green;
+}
