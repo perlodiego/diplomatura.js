@@ -49,26 +49,35 @@ async function update(req, res) {
   const updateData = Helpers.paramsBuilder(validParams, req.body);
   const query = { _id: new ObjectId(req.params.id) };
   const opts = { returnOriginal: false };
-
-  await Helpers.update(collectionName, query, updateData, opts)
-    .then((doc) => {
-      console.log(doc);
-      res.json(doc);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
+  try {
+    await Helpers.update(collectionName, query, updateData, opts)
+      .then((doc) => {
+        console.log(doc);
+        res.json(doc);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 }
 
 async function destroy(req, res) {
   const query = { _id: new ObjectId(req.params.id) };
-  await Helpers.destroy(collectionName, query)
-    .then((doc) => res.json(doc))
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
+  try {
+    await Helpers.destroy(collectionName, query)
+      .then((doc) => res.json(doc))
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 }
 
 export default {
