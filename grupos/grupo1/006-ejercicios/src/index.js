@@ -1,9 +1,9 @@
 //document.getElementById('app').innerHTML = 'Hello World!';
 
-// Ejercicio 1: Generar una tabla:
+// Ejercicio 1: Generar una tabla: -> index2.html
 
 const crearTabla = (es = false) => {
-  document.getElementById('app').innerHTML = '';
+  document.getElementById('app').innerHTML = ''; // Limpia el contenedor.
   const MOUNTAINS = [
     { name: 'Kilimanjaro', height: 5895, place: 'Tanzania' },
     { name: 'Everest', height: 8848, place: 'Nepal' },
@@ -16,7 +16,7 @@ const crearTabla = (es = false) => {
 
   const tabla = document.createElement('table');
 
-  let headers = Object.keys(MOUNTAINS[0]);
+  let headers = Object.keys(MOUNTAINS[0]); // Usamos el primer elemento para extraer las keys.
 
   const tablaHeaders = document.createElement('tr');
 
@@ -125,7 +125,7 @@ const crearTabla = (es = false) => {
 
 // contenedor.appendChild(ulist);
 
-// Ejercicio 4: Jugando con globos
+// Ejercicio 4: Jugando con globos -> index4.html
 
 const eliminarGlobo = (element) => {
   element.remove();
@@ -137,14 +137,18 @@ const eliminarGlobo = (element) => {
 };
 
 const obtenerNumeroRandom = (max) => {
-  return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * max);
+};
+
+const obtenerNumeroRango = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const colores = ['red', 'blue', 'yellow'];
 
 const generarGlobos = () => {
-  const cantidadGlobos = obtenerNumeroRandom(30);
-  console.log(cantidadGlobos);
+  const cantidadGlobos = obtenerNumeroRango(10, 30);
+  console.log(cantidadGlobos); // Solo para validar.
 
   for (let i = 0; i < cantidadGlobos; i++) {
     let contenedor = document.createElement('div');
@@ -160,5 +164,4 @@ const generarGlobos = () => {
     document.body.appendChild(contenedor);
   }
 };
-
 generarGlobos();
