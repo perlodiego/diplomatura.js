@@ -17,7 +17,7 @@ function refreshList(elem) {
       const erase = document.createElement('button');
       erase.addEventListener('click', destroy);
       erase.innerHTML = 'Borrar';
-      erase.style.background = '#ee6969';
+      erase.classList.add('destroyButton');
       newElem.appendChild(erase);
 
       const text = document.createElement('span');
@@ -52,7 +52,7 @@ function save() {
 function appConstructor() {
   return `<form action="#">
   <input type="text" id="item" placeholder="Para hacer" />
-  <button style="background = '#9ED48F'"  id="add" type="submit">Agregar</button></form>`;
+  <button id="add" class="addButton" type="submit">Agregar</button></form>`;
 }
 
 window.onload = () => {

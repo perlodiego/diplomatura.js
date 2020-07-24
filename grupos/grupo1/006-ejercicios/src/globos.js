@@ -5,13 +5,11 @@ const checkRemaining = () => getGameSpace().children.length === 0;
 
 function newGlobo() {
   const space = document.createElement('div');
-  space.style =
-    'float: left; margin: 10px; width:100px; height: 160px;text-align:center;';
+  space.classList.add('globoDiv');
 
   const globo = document.createElement('div');
-  globo.className = 'globo';
-  globo.style =
-    'cursor: crosshair; border-radius:100%;width:100px; height: 140px; background-color:' +
+  globo.classList.add('globo');
+  globo.style.backgroundColor =
     colores[Math.trunc(Math.random() * colores.length)];
   globo.addEventListener('click', destroy);
 

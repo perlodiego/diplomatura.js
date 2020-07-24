@@ -1,7 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,node,visualstudio,macos,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,node,visualstudio,macos,linux
-
+hiragana.*
 ### Linux ###
 *~
 
