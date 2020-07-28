@@ -53,6 +53,8 @@ const crearTabla = (es = false) => {
   }
 };
 
+//crearTabla();
+
 // Ejercicio 2: Variante de tabla. -> index3.html
 
 // let boton = document.getElementById('boton');
@@ -165,3 +167,5 @@ const generarGlobos = () => {
   }
 };
 generarGlobos();
+
+//window.localStorage.setItem('otroNombre', 'Jose');
