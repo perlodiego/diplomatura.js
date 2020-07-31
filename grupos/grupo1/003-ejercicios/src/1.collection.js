@@ -1,25 +1,16 @@
-class Collection {
-  constructor(elementos = null) {
-    this.elementos = elementos || [];
-  }
-
-  add(elemento) {
-    this.elementos.push(elemento);
-    return this.elementos;
-  }
-
-  //coment
-  delete(elemento) {
-    if (this.has(elemento)) {
-      let index = this.elementos.indexOf(elemento);
-      this.elementos.splice(index, 1);
-      return this.elementos;
+export class Collection{
+    constructor(value=[]){
+        this.lista = value || [];
     }
-  }
-
-  has(elemento) {
-    return this.elementos.find((e) => e == elemento);
-  }
+    add(elemento){
+        if(!this.has(elemento)) this.lista.push(elemento);
+    }
+    delete(elemento){
+        if(this.has(elemento)){
+        let index = this.lista.indexOf(elemento);
+        if(index != -1) this.lista.splice(index,1);}
+        
+    }
+    has(elemento){ return this.lista.includes(elemento)};
 }
 
-module.exports = Collection;
