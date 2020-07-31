@@ -9,28 +9,32 @@ const MOUNTAINS = [
   { name: 'Mt. Aconcagua', height: 6962, place: 'Argentina' },
 ];
 
+//Crea cada row
 function createRow(row, pos) {
   const tag = pos === 0 ? 'th' : 'td';
   return Object.values(row).reduce(
-    (column, element) => (column += `<${tag}>${element}</${tag}>`),
+    (column, element) =>
+      (column += `<${tag}>${element
+        .toString()
+        .replace(/[<>$()/]/g, '')}</${tag}>`),
     ''
   );
 }
 
+//Headers
 function selectLang(lang) {
   switch (lang) {
     case 'es':
       return { name: 'Nombre', height: 'Altura', place: 'Lugar' };
-    case 'jp':
-      return { name: '名前', height: '高さ', place: '場所' };
     default:
       return { name: 'Name', height: 'Height', place: 'Place' };
   }
 }
 
+//:void Crea la tabla
 function createMountainsTable(e) {
-  const info = [selectLang(e.originalTarget.id), ...MOUNTAINS];
-  const processedData = info.reduce(
+  const infoTabla = [selectLang(e.originalTarget.id), ...MOUNTAINS];
+  const processedData = infoTabla.reduce(
     (rows, mountain, pos) => (rows += `<tr>${createRow(mountain, pos)}</tr>`),
     ''
   );
@@ -39,6 +43,7 @@ function createMountainsTable(e) {
   ).innerHTML = `<table border=1>${processedData}</table>`;
 }
 
+//Genera la app inicial
 function appConstructor() {
   return `<button id="en">Generate now!</button><button id="es">¡Generar Ahora!</button><button id="jp">作成！</button>`;
 }

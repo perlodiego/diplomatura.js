@@ -10,7 +10,7 @@ function newGlobo() {
   const globo = document.createElement('div');
   globo.classList.add('globo');
   globo.style.backgroundColor =
-    colores[Math.trunc(Math.random() * colores.length)];
+    colores[Math.trunc(Math.random() * colores.length)] || 'red';
   globo.addEventListener('click', destroy);
 
   const cola = document.createElement('img');

@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 app.use('/alumnos', alumnosRoutes);
 app.use('/profesores', profesoresRoutes);
 
-console.log(app.get('env'));
 // error handler
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
