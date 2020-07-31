@@ -8,6 +8,7 @@ class Collection {
     return this.elementos;
   }
 
+  //coment
   delete(elemento) {
     if (this.has(elemento)) {
       let index = this.elementos.indexOf(elemento);
