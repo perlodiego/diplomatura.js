@@ -18,10 +18,10 @@ async function create(req, res) {
 
 async function index(req, res) {
   try {
-    const query = req.query.nombre ? { nombre: req.query.nombre } : '';
-    await Helpers.find(collectionName, query).then((docs) => {
-      res.send(docs);
-    });
+    const query = req.query.nombre
+      ? { nombre: { $regex: new RegExp(req.query.nombre), $options: 'i' } }
+      : '';
+    await Helpers.find(collectionName, query).then((docs) => res.send(docs));
   } catch (err) {
     console.log(err);
     res.json(err);
@@ -35,7 +35,7 @@ async function display(req, res) {
       if (doc) {
         console.log(doc);
       } else {
-        console.log('Not founded');
+        console.log('Not found');
       }
       res.send(doc);
     });
@@ -46,35 +46,41 @@ async function display(req, res) {
 }
 
 async function update(req, res) {
-  const updateData = Helpers.paramsBuilder(validParams, req.body);
-  const query = { _id: new ObjectId(req.params.id) };
-  const opts = { new: true };
-
-  await Helpers.update(collectionName, query, updateData, opts)
-    .then((doc) => {
-      console.log(doc);
-      res.json(doc);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
+  try {
+    const updateData = Helpers.paramsBuilder(validParams, req.body);
+    const query = { _id: new ObjectId(req.params.id) };
+    const opts = { returnOriginal: false };
+    await Helpers.update(collectionName, query, updateData, opts)
+      .then((doc) => {
+        console.log(doc);
+        res.json(doc);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 }
 
 async function destroy(req, res) {
-  const query = { _id: new ObjectId(req.params.id) };
-  await Helpers.destroy(collectionName, query)
-    .then((doc) => {
-      console.log(doc);
-      res.json(doc);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
+  try {
+    const query = { _id: new ObjectId(req.params.id) };
+    await Helpers.destroy(collectionName, query)
+      .then((doc) => res.json(doc))
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 }
 
-module.exports = {
+export default {
   create,
   index,
   display,

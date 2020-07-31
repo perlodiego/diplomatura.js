@@ -1,8 +1,8 @@
 import { Helpers } from '../models/helpers';
 import { ObjectId } from 'mongodb';
 
-const collectionName = 'profesores';
-const validParams = ['id', 'nombre'];
+const collectionName = 'calificaciones';
+const validParams = ['id', 'nota'];
 
 async function create(req, res) {
   try {
@@ -18,10 +18,10 @@ async function create(req, res) {
 
 async function index(req, res) {
   try {
-    const query = req.query.nombre ? { nombre: req.query.nombre } : '';
-    await Helpers.find(collectionName, query).then((docs) => {
-      res.send(docs);
-    });
+    const query = req.query.nombre
+      ? { nombre: { $regex: new RegExp(req.query.nombre), $options: 'i' } }
+      : '';
+    await Helpers.find(collectionName, query).then((docs) => res.send(docs));
   } catch (err) {
     console.log(err);
     res.json(err);
@@ -30,8 +30,8 @@ async function index(req, res) {
 
 async function display(req, res) {
   try {
+    const query = { _id: new ObjectId(req.params.id) };
     await Helpers.findOne(collectionName, query).then((doc) => {
-      const query = { _id: new ObjectId(req.params.id) };
       if (doc) {
         console.log(doc);
       } else {
@@ -69,9 +69,7 @@ async function destroy(req, res) {
   try {
     const query = { _id: new ObjectId(req.params.id) };
     await Helpers.destroy(collectionName, query)
-      .then((doc) => {
-        res.json(doc.result);
-      })
+      .then((doc) => res.json(doc))
       .catch((err) => {
         console.log(err);
         res.json(err);

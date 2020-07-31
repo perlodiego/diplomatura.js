@@ -1,6 +1,7 @@
 import express from 'express';
+import alumnosController from '../controllers/alumnosController';
+
 const router = express.Router();
-const alumnosController = require('../controllers/alumnosController');
 
 router.route('/').post(alumnosController.create).get(alumnosController.index);
 
@@ -10,4 +11,4 @@ router
   .put(alumnosController.update)
   .delete(alumnosController.destroy);
 
-module.exports = router;
+export default router;
