@@ -1,29 +1,18 @@
 import fetch from 'node-fetch';
 
-export const resultadoConsole = () => {
-  fetch('https://jsonplaceholder.typicode.com/users').then((result) =>
-    console.log(result)
-  );
-};
+export const respuestaBulk = fetch(
+  'https://jsonplaceholder.typicode.com/users'
+).then((value) => console.log(value));
 
-export const resultadoJson = () => {
-  fetch('https://jsonplaceholder.typicode.com/users')
-    .then((result) => result.json())
-    .then((result) => {
-      console.log(result);
-    });
-};
+export const respuestaJson = fetch('https://jsonplaceholder.typicode.com/users')
+  .then((value) => value.json())
+  .then((respuesta) => console.log(respuesta));
 
-export const resultadoFiltrado = (id) => {
-  fetch('https://jsonplaceholder.typicode.com/users')
-    .then((result) => result.json())
-    .then((result) => {
-      const user = result.find((x) => x.id === id);
-      const found = {
-        name: user.name,
-        address: user.address,
-      };
-      console.log(found);
-    });
-};
-
+export const respuestaDatos = (iduser) =>
+  fetch('https://jsonplaceholder.typicode.com/users/' + iduser)
+    .then((value) => value.json())
+    .then((respuesta) =>
+      console.log(
+        'Name: ' + respuesta.name + ' | City: ' + respuesta.address.city
+      )
+    );

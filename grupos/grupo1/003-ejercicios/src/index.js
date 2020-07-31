@@ -1,39 +1,25 @@
-import {Collection} from './1.collection'
-import {Delay } from './3.delay'
-import {Vector} from './2.claseVector'
-import {resultadoConsole,resultadoJson,resultadoFiltrado} from './4.api'
-import {getRemoteData } from './5.api.AsyncAwait'
-import {delay,run} from './6.delayRefactor'
-/* const colection = new Collection();
-colection.add('manzana')
-colection.add('naranja')
-console.log(colection.lista)
-colection.delete('naranja')
-console.log(colection.lista)
-console.log(colection.has('manzana'))
+'use strict';
+const Collection = require('./1.collection.js');
+const Vector = require('./2.vector.js');
+const delay = require('./3.delay.js');
+//const api = require('./4.api.js');
+//const api2 = require('./5.api.js');
+const delayPromise = require('./6.delay.js');
 
-const delay= new Delay() */
-/* console.log(1);
-delay.delay('Terminó 1', 1000);
-console.log(2);
-delay.delay('Terminó 2', 1000);
-console.log(3);
-delay.delay('Terminó 3', 1000); */
+let collection = new Collection([1, 2, 3]);
+//console.log(collection.add("x"));
+//console.log(collection.delete("3"));
+//console.log(collection.has(1));
 
-/* console.log(1);
-delay.delay('Terminó 1', 3000);
-console.log(2);
-delay.delay('Terminó 2', 2000);
-console.log(3);
-delay.delay('Terminó 3', 1000); */
+//console.log(new Vector(1, 2).sumar(new Vector(10, 20)));
+//console.log(new Vector(1, 2));
 
-/* console.log(new Vector(1, 2).sumar(new Vector(2, 3))); */
+//delay.run();
 
-//resultadoConsole()
-//resultadoJson()
-//resultadoFiltrado(10)
-//getRemoteData(9)
+//api.respuestaBulk;
+//api.respuestaJson;
+//api.respuestaDatos(1);
 
-/* delay(1);
-delay(2);
-delay(3); */
+//api2.getRemoteData(1);
+
+//delayPromise.run();
