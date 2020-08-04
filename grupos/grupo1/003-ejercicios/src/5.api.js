@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 
+<<<<<<< HEAD
 // export async function getRemoteData() {
 //   fetch('https://jsonplaceholder.typicode.com/users')
 //     .then((response) => {
@@ -34,4 +35,16 @@ export async function getRemoteData() {
   } catch (error) {
     console.log(error);
   }
+=======
+export async function getRemoteData(iduser) {
+  const respuesta = await fetch(
+    'https://jsonplaceholder.typicode.com/users/' + iduser
+  )
+    .then((value) => value.json())
+    .then((respuesta) =>
+      console.log(
+        'Name: ' + respuesta.name + ' | City: ' + respuesta.address.city
+      )
+    );
+>>>>>>> 54ca61f1dd7744c9869792294aafd36e7fa126e8
 }
