@@ -8,6 +8,7 @@ export default class Lista extends Component {
       vistaActual: "lista",
       tabla: this.props.tabla,
     };
+    console.log(datos["materias"][1].nombre);
   }
 
   getLista(tabla) {
@@ -17,15 +18,44 @@ export default class Lista extends Component {
           <thead>
             <tr>
               <th>Id</th>
-              <th>Nombre</th>
+              {tabla === "calificaciones" ? <th>Materia</th> : <th>Nombre</th>}
+              {tabla === "alumnos" ? (
+                <th>Edad</th>
+              ) : tabla === "calificaciones" ? (
+                <th>Nota</th>
+              ) : (
+                <th></th>
+              )}
               <th>Acción</th>
             </tr>
           </thead>
           <tbody>
             {datos[tabla].map((dato) => (
-              <tr key={dato.id}>
-                <td>{dato.id}</td>
-                <td>{dato.nombre}</td>
+              <tr
+                key={
+                  tabla === "calificaciones"
+                    ? "" + dato.alumno + dato.materia
+                    : dato.id
+                }
+              >
+                <td>
+                  {tabla === "calificaciones"
+                    ? datos["alumnos"][dato.alumno].nombre
+                    : dato.id}
+                </td>
+                <td>
+                  {tabla === "calificaciones"
+                    ? datos["materias"][dato.materia].nombre
+                    : dato.nombre}
+                </td>
+                <td>
+                  {tabla === "calificaciones"
+                    ? dato.nota
+                    : tabla === "alumnos"
+                    ? dato.edad
+                    : ""}
+                </td>
+
                 <td>
                   <button
                     type="button"
