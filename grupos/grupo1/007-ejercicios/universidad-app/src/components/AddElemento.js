@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
+import { firstToUpperCase } from '../assets/js/Helpers';
 
+const NOT_SHOW_TOADD = ['id'];
 export default class AddElemento extends Component {
 	constructor(props) {
 		super(props);
-		this.state = props.elementos;
-		this.newProps = '';
+		this.state = {
+			elementos: props.elementos,
+			vistaActual: props.vistaActua,
+			inputData: '',
+		};
 	}
 
 	componentDidUpdate(prev_props, prev_state) {
-		console.log('prev_props');
-		console.log(prev_props.elementos);
-		console.log('this.props');
-		console.log(this.props.elementos);
-		if (prev_props.elementos !== this.props.elementos) {
-			this.newProps = this.state;
-			this.setState(this.newProps);
+		if (prev_props.vistaActual !== this.props.vistaActual) {
+			this.setState({
+				elementos: this.props.elementos,
+				vistaActual: this.props.vistaActual,
+			});
 		}
 	}
-	onChange(e) {
+	onChange = (e) => {
 		const key = e.target.id;
 		const value = e.target.value;
 
@@ -25,35 +28,33 @@ export default class AddElemento extends Component {
 		elementoToAdd[key] = value;
 
 		this.setState(elementoToAdd);
-	}
-	agregar(e) {
+	};
+	agregar = (e) => {
 		this.props.addHandler(this.state);
+		//limpiar campos
 		Array.from(e.target.parentNode.children).forEach((elemento) => {
 			if (elemento.tagName === 'input'.toUpperCase()) elemento.value = '';
 		});
-	}
+	};
 	render() {
-		const inputs = Object.keys(this.state);
+		const firstElement = this.state.elementos[0];
+		const inputs = Object.keys(firstElement).filter(
+			(elem) => !NOT_SHOW_TOADD.includes(elem)
+		);
 		for (var i = 0; i < inputs.length; i++) {
 			const elem = inputs[i];
-			if (this.newProps) {
-				if (this.newProps[elem] === undefined) {
-					continue;
-				}
-			}
-			console.log(elem);
 			inputs[i] = (
-				<>
-					&nbsp;{elem}{' '}
-					<input key={elem} id={elem} onChange={this.onChange.bind(this)} />
-				</>
+				<span key={i}>
+					&nbsp;{firstToUpperCase(elem)}{' '}
+					<input id={elem + this.state.vistaActual} onChange={this.onChange} />
+				</span>
 			);
 		}
 
 		return (
 			<div>
 				{inputs}
-				<button onClick={this.agregar.bind(this)} className="btn btn-primary">
+				<button onClick={this.agregar} className="btn btn-primary">
 					Add
 				</button>
 			</div>
